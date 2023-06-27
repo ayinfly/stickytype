@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>stickytype</title>
+    {% if title %}
+        <title>stickytype | {{ title }}</title>
+    {% else %}
+        <title>stickytype</title>
+    {% endif %}
 </head>
 <body>
     {% block content %}{% endblock %}
