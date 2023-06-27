@@ -19,7 +19,7 @@
 </head>
 <body>
     <header class="site-header">
-        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand mr-4" href="/">stickytype</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,10 @@
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link" href="{% url 'type-home'%}">home</a>
+                        <a class="nav-item nav-link" href="#">stats</a>
                         <a class="nav-item nav-link" href="{% url 'type-about'%}">about</a>
+                        <a class="nav-item nav-link" href="#">leaderboard</a>
+                        <a class="nav-item nav-link disabled" href="/admin">admin</a>
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
