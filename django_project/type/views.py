@@ -1,17 +1,31 @@
 from django.shortcuts import render
-from .models import Stat
+
+posts = [
+    {
+        'author': 'Help',
+        'title': 'Help title',
+        'content': 'whooh',
+        'date_posted': 'idk'
+    },
+    {
+        'author': 'Help 2',
+        'title': 'Help title',
+        'content': 'whooh',
+        'date_posted': 'idk'
+    },
+    {
+        'author': 'Help 3',
+        'title': 'Help title',
+        'content': 'whooh',
+        'date_posted': 'idk'
+    }
+]
 
 def home(request):
-    return render(request, 'type/home.html')
+    context = {
+        'posts': posts
+    }
+    return render(request, 'type/home.html', context)
 
 def about(request):
-    context = {
-        'title': 'about'
-    }
-    return render(request, 'type/about.html', context)
-
-def stats(request):
-    context = {
-        'stats': Stat.objects.all()
-    }
-    return render(request, 'type/stats.html', context)
+    return render(request, 'type/about.html', {'title': 'about'})
