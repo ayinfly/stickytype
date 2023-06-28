@@ -1,11 +1,12 @@
 {% extends "type/base.html" %}
 {% block content%}
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
         <tr>
             <th scope="col">wpm</th>
             <th scope="col">accuracy</th>
             <th scope="col">mode</th>
+            <th scope="col">user</th>
             <th scope="col">date</th>
         </tr>
         </thead>
@@ -15,6 +16,7 @@
                     <td>{{ stat.wpm_total }}</td>
                     <td>{{ stat.accuracy }}</td>
                     <td>{{ stat.mode }}</td>
+                    <td>{{ stat.author }}</td>
                     <td>{{ stat.time }}</td>
                 </tr>
             {% endfor %}
