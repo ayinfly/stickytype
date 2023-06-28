@@ -1,12 +1,24 @@
 {% extends "type/base.html" %}
 {% block content%}
-    {% for stat in stats %}
-        <article class="media content-section">
-            <div class="media-body">
-            <div class="article-metadata">
-                <small class="text-muted">{{ stat.time }}</small>
-            </div>
-            </div>
-        </article>
-    {% endfor %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">wpm</th>
+            <th scope="col">accuracy</th>
+            <th scope="col">mode</th>
+            <th scope="col">date</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for stat in stats %}
+                <tr>
+                    <td>{{ stat.wpm_total }}</td>
+                    <td>{{ stat.accuracy }}</td>
+                    <td>{{ stat.mode }}</td>
+                    <td>{{ stat.time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
 {% endblock content%}
