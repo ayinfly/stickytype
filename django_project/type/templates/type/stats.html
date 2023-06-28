@@ -1,0 +1,12 @@
+{% extends "type/base.html" %}
+{% block content%}
+    {% for stat in stats %}
+        <article class="media content-section">
+            <div class="media-body">
+            <div class="article-metadata">
+                <small class="text-muted">{{ stat.time }}</small>
+            </div>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content%}
