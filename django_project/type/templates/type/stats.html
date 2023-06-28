@@ -4,6 +4,7 @@
         <thead>
         <tr>
             <th scope="col">wpm</th>
+            <th scope="col">raw</th>
             <th scope="col">accuracy</th>
             <th scope="col">mode</th>
             <th scope="col">user</th>
@@ -14,7 +15,8 @@
             {% for stat in stats %}
                 <tr>
                     <td>{{ stat.wpm_total }}</td>
-                    <td>{{ stat.accuracy }}</td>
+                    <td>{{ stat.wpm_raw }}</td>
+                    <td>{{ stat.accuracy }}%</td>
                     <td>{{ stat.mode }}</td>
                     <td>{{ stat.author }}</td>
                     <td>{{ stat.time }}</td>

@@ -11,6 +11,9 @@ class Stat(models.Model):
     # total wpm
     wpm_total = models.PositiveSmallIntegerField(default=0)
 
+    # raw wpm
+    wpm_raw = models.PositiveSmallIntegerField(default=0)
+
     # time the test was taken
     time = models.DateTimeField(auto_now_add=True)
 
