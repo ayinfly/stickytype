@@ -9,17 +9,19 @@
             <th scope="col">mode</th>
             <th scope="col">user</th>
             <th scope="col">date</th>
+            <th scope="col">more</th>
         </tr>
         </thead>
         <tbody>
             {% for stat in stats %}
-                <tr onclick="window.location='#';">
+                <tr>
                     <td>{{ stat.wpm_total }}</td>
                     <td>{{ stat.wpm_raw }}</td>
                     <td>{{ stat.accuracy }}%</td>
                     <td>{{ stat.mode }}</td>
                     <td>{{ stat.author.username }}</td>
                     <td>{{ stat.time }}</td>
+                    <td><a href="{% url 'stat-detail' stat.id %}" class="stretched-link">→</a></td>
                 </tr>
             {% endfor %}
         </tbody>
