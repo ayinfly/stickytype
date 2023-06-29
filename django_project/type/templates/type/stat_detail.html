@@ -12,16 +12,14 @@
         </tr>
         </thead>
         <tbody>
-            {% for stat in stats %}
-                <tr onclick="window.location='#';">
-                    <td>{{ stat.wpm_total }}</td>
-                    <td>{{ stat.wpm_raw }}</td>
-                    <td>{{ stat.accuracy }}%</td>
-                    <td>{{ stat.mode }}</td>
-                    <td>{{ stat.author.username }}</td>
-                    <td>{{ stat.time }}</td>
-                </tr>
-            {% endfor %}
+            <tr>
+                <td>{{ object.wpm_total }}</td>
+                <td>{{ object.wpm_raw }}</td>
+                <td>{{ object.accuracy }}%</td>
+                <td>{{ object.mode }}</td>
+                <td>{{ object.author.username }}</td>
+                <td>{{ object.time }}</td>
+            </tr>
         </tbody>
     </table>
     
