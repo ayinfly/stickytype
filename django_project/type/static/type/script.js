@@ -1,3 +1,4 @@
+// paragraph bank
 const paragraphs = [
     "Authors often misinterpret the lettuce as a folklore rabbi, when in actuality it feels more like an uncursed bacon. Pursued distances show us how mother-in-laws can be charleses. Authors often misinterpret the lion as a cormous science, when in actuality it feels more like a leprous lasagna. Recent controversy aside, their band was, in this moment, a racemed suit. The clutch of a joke becomes a togaed chair. The first pickled chess is.",
     "In modern times the first scrawny kitten is, in its own way, an input. An ostrich is the beginner of a roast. An appressed exhaust is a gun of the mind. A recorder is a grade from the right perspective. A hygienic is the cowbell of a skin. Few can name a dun brazil that isn't a highbrow playroom. The unwished beast comes from a thorny oxygen. An insured advantage's respect comes with it the thought that the lucid specialist is a fix.",
@@ -21,6 +22,7 @@ const paragraphs = [
     "Those cowbells are nothing more than elements. This could be, or perhaps before stockings, thoughts were only opinions. A coil of the exclamation is assumed to be a hurtless toy. A board is the cast of a religion. In ancient times the first stinko sailboat is, in its own way, an exchange. Few can name a tutti channel that isn't a footless operation. Extending this logic, an oatmeal is the rooster of a shake. Those step-sons are nothing more than matches."
 ];
 
+// document consts
 const typingText = document.querySelector(".typing-text p"),
 inpField = document.querySelector(".wrapper .input-field"),
 tryAgainBtn = document.querySelector(".content button"),
@@ -29,11 +31,13 @@ mistakeTag = document.querySelector(".mistake span"),
 wpmTag = document.querySelector(".wpm span"),
 cpmTag = document.querySelector(".cpm span");
 
+// important vars
 let timer,
 maxTime = 15,
 timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
 
+// generate a random paragraph and adds each letter as a span to the typing text element
 function loadParagraph() {
     const ranIndex = Math.floor(Math.random() * paragraphs.length);
     typingText.innerHTML = "";
@@ -46,6 +50,7 @@ function loadParagraph() {
     typingText.addEventListener("click", () => inpField.focus());
 }
 
+// 
 function initTyping() {
     let characters = typingText.querySelectorAll("span");
     let typedChar = inpField.value.split("")[charIndex];
