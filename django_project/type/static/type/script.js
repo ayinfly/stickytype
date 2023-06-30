@@ -50,7 +50,7 @@ function loadParagraph() {
     typingText.addEventListener("click", () => inpField.focus());
 }
 
-// 
+// checks typing stats
 function initTyping() {
     let characters = typingText.querySelectorAll("span");
     let typedChar = inpField.value.split("")[charIndex];
@@ -91,6 +91,7 @@ function initTyping() {
     }   
 }
 
+// timer
 function initTimer() {
     if(timeLeft > 0) {
         timeLeft--;
@@ -102,6 +103,7 @@ function initTimer() {
     }
 }
 
+// game reset
 function resetGame() {
     loadParagraph();
     clearInterval(timer);
@@ -112,6 +114,11 @@ function resetGame() {
     wpmTag.innerText = 0;
     mistakeTag.innerText = 0;
     cpmTag.innerText = 0;
+}
+
+// post data
+function setPostRequest() {
+    let form = document.createElement("form");
 }
 
 loadParagraph();
