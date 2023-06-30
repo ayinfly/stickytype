@@ -1,6 +1,7 @@
 from django.db import models
 # from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 VALID_KEYS = "qwertyuiopasdfghjklzxcvbnm"
 
@@ -26,6 +27,11 @@ class Stat(models.Model):
     # string representation
     def __str__(self):
         return str(self.author) + ": " + str(self.time)
+    
+    def get_absolute_url(self):
+        return reverse('stat-detail', kwargs={'pk': self.pk})
+    
+
 
 for val in VALID_KEYS:
     Stat.add_to_class("wpm_"+val, models.PositiveSmallIntegerField(default=0))

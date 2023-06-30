@@ -116,11 +116,6 @@ function resetGame() {
     cpmTag.innerText = 0;
 }
 
-// post data
-function setPostRequest() {
-    let form = document.createElement("form");
-}
-
 loadParagraph();
 inpField.addEventListener("input", initTyping);
 tryAgainBtn.addEventListener("click", resetGame);
