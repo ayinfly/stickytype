@@ -22,7 +22,9 @@ class StatDetailView(DetailView):
 
 class StatCreateView(CreateView):
     model = Stat
-    fields = ['wpm_total']
+    fields = ['wpm_total', 'wpm_raw', 'accuracy', 'mode']
+    for ch in 'qwertyuiopasdfghjklzxcvbnm':
+        fields.append('wpm_' + ch)
 
     def form_valid(self, form):
         form.instance.author = self.request.user
