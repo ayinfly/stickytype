@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from typing import Any
+from django.db.models.query import QuerySet
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Stat
 
@@ -17,6 +20,19 @@ class StatListView(ListView):
     template_name = 'type/stats.html'
     context_object_name = 'stats'
     ordering = ['-time']
+    paginate_by = 10
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Stat.objects.filter(author=user).order_by('-time')
+        
+
+class LeaderboardListView(ListView):
+    model = Stat
+    template_name = 'type/leaderboard.html'
+    context_object_name = 'stats'
+    ordering = ['-wpm_total']
+    paginate_by = 10
 
 class StatDetailView(DetailView):
     model = Stat

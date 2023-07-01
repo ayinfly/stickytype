@@ -1,6 +1,5 @@
 {% extends "type/base.html" %}
 {% block content%}
-    <h1 class="mb-3">stats of <b>{{ view.kwargs.username }}</b></h1>
     <table class="table table-hover table-striped bg-light" style="border-radius: 10px;">
         <thead>
             <tr>
@@ -20,7 +19,7 @@
                     <td>{{ stat.wpm_raw }}</td>
                     <td>{{ stat.accuracy }}%</td>
                     <td>{{ stat.mode }}</td>
-                    <td>{{ stat.author.username }}</td>
+                    <td><a href="{% url 'type-stats' stat.author.username %}">{{ stat.author.username }}</a></td>
                     <td>{{ stat.time }}</td>
                     <td><a href="{% url 'stat-detail' stat.id %}" class="stretched-link">→</a></td>
                 </tr>
