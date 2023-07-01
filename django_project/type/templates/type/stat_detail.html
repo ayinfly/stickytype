@@ -22,5 +22,11 @@
             </tr>
         </tbody>
     </table>
+    <div>
+        {% if object.author == user %}
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'stat-update' object.id %}">update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'stat-delete' object.id %}">delete</a>
+        {% endif %}
+    </div>
     
 {% endblock content%}

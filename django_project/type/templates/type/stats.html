@@ -1,16 +1,16 @@
 {% extends "type/base.html" %}
 {% block content%}
-    <table class="table table-hover table-striped bg-light">
+    <table class="table table-hover table-striped bg-light" style="border-radius: 10px;">
         <thead>
-        <tr>
-            <th scope="col">wpm</th>
-            <th scope="col">raw</th>
-            <th scope="col">accuracy</th>
-            <th scope="col">mode</th>
-            <th scope="col">user</th>
-            <th scope="col">date</th>
-            <th scope="col">more</th>
-        </tr>
+            <tr>
+                <th scope="col" style="border: none;">wpm</th>
+                <th scope="col">raw</th>
+                <th scope="col">accuracy</th>
+                <th scope="col">mode</th>
+                <th scope="col">user</th>
+                <th scope="col">date</th>
+                <th scope="col" style="border: none;">more</th>
+            </tr>
         </thead>
         <tbody>
             {% for stat in stats %}
