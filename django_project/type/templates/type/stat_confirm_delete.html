@@ -1,0 +1,17 @@
+{% extends "type/base.html" %}
+{% block content%}
+    <div class="content-section w-50 mx-auto">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group text-lowercase">
+                <legend class="border-bottom bm-4">delete stat</legend>
+                <h2>are you sure you want to delete your <b>{{ object.wpm_total }}</b> wpm test from <b>{{ object.time }}</b>
+                </h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">yes, delete</button>
+                <a class="btn btn-outline-secondary" hrel="{% url 'stat-detail' object.id %}">cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content%}
