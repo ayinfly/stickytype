@@ -146,10 +146,8 @@ function sendData() {
         },
         success: function (data) {
             if (data.status == 1) {
-                console.log('status ok');
                 window.location.href = "/stats/" + data.username;
             } else {
-                console.log('status failed');
                 window.location.reload();
             }
         }
