@@ -27,8 +27,9 @@ const typingText = document.querySelector(".typing-text p"),
 inpField = document.querySelector(".wrapper .input-field"),
 tryAgainBtn = document.querySelector(".content button"),
 timeTag = document.querySelector(".time span b"),
-mistakeTag = document.querySelector(".mistake span"),
+accuracyTag = document.querySelector(".accuracy span"),
 wpmTag = document.querySelector(".wpm span"),
+rawTag = document.querySelector(".raw span"),
 cpmTag = document.querySelector(".cpm span");
 
 // important vars
@@ -90,7 +91,10 @@ function initTyping() {
         wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
         wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
         wpmTag.innerText = wpm;
-        mistakeTag.innerText = mistakes;
+        accuracy = Math.round(((charIndex - mistakes) * 100) / charIndex);
+        accuracyTag.innerText = accuracy + "%";
+        wpm_raw = Math.round((charIndex  / 5) / (maxTime - timeLeft) * 60);
+        rawTag.innerText = wpm_raw
         cpmTag.innerText = charIndex - mistakes;
     } else {
         clearInterval(timer);
@@ -133,7 +137,7 @@ function resetGame() {
     inpField.value = "";
     timeTag.innerText = timeLeft;
     wpmTag.innerText = 0;
-    mistakeTag.innerText = 0;
+    accuracyTag.innerText = 0;
     cpmTag.innerText = 0;
 }
 

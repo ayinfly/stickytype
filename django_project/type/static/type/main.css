@@ -1,15 +1,18 @@
+/* general formatting idk why its here */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* overall page layouts */
 body {
     color: #333333;
-    margin-top: 5rem;
+    margin-top: 15%;
     display: flex;
     /* padding: 0 10px; */
     /* align-items: center;  //this shit makes everything too low*/
+    align-items: center;
     /* justify-content: center; */
     /* min-height: 100vh; */
     background: #D7CEC7;
@@ -25,26 +28,27 @@ ul {
     background: #D7CEC7;
 }
 
+/* round edges for tables */
 .round {
     border-radius: 10px;
 }
 
-.bg-steel {
-    background-color: #5f788a;
-}
-
+/* navbar links */
 .site-header .navbar-nav .nav-link {
     color: #cbd5db;
 }
 
+/* navbar links on hover */
 .site-header .navbar-nav .nav-link:hover {
     color: #ffffff;
 }
 
+/* i don't think this does anything, but not going to risk it anymore */
 .site-header .navbar-nav .nav-link.active {
     font-weight: 500;
 }
 
+/* content section that is rarely used */
 .content-section {
     background: #ffffff;
     padding: 10px 20px;
@@ -53,53 +57,7 @@ ul {
     margin-bottom: 20px;
 }
 
-.article-title {
-    color: #444444;
-}
-
-a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
-}
-
-.article-content {
-    white-space: pre-line;
-}
-
-.article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
-}
-
-.article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
-}
-
-.article-metadata a:hover {
-    color: #333;
-    text-decoration: none;
-}
-
-.article-svg {
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
-}
-
-.account-img {
-    height: 125px;
-    width: 125px;
-    margin-right: 20px;
-    margin-bottom: 16px;
-}
-
-.account-heading {
-    font-size: 2.5rem;
-}
-
+/* typing box */
 .wrapper{
     /* width: 770px; */
     padding: 35px;
@@ -107,34 +65,49 @@ a.article-title:hover {
     border-radius: 10px;
     box-shadow: 0 10px 15px rgba(0,0,0,0.05);
 }
+
+/* invisible box to type stuff */
 .wrapper .input-field{
     opacity: 0;
     z-index: -999;
     position: absolute;
 }
+
+/* bottom text */
 .wrapper .content-box{
     padding: 13px 20px 0;
     border-radius: 10px;
     border: 1px solid #bfbfbf;
 }
+
+/* words to type */
 .content-box .typing-text{
     overflow: hidden;
     max-height: 256px;
 }
+
+/* scrollbar hidden */
 .typing-text::-webkit-scrollbar{
     width: 0;
 }
+
+/* words in typing-text */
 .typing-text p{
     font-size: 21px;
     text-align: justify;
     letter-spacing: 1px;
-    word-break: break-word;
+    word-break: break-all;
+    color: lightgrey;
 }
+
+/* letters in typing-text */
 .typing-text p span{
     position: relative;
 }
+
+/* correct letters/incorrect */
 .typing-text p span.correct{
-    color: #56964f;
+    color: #333333;
 }
 .typing-text p span.incorrect{
     color: #cb3439;
@@ -142,8 +115,10 @@ a.article-title:hover {
     background: #ffc0cb;
     /* border-radius: 4px; */
 }
+
+/* highlighted letters */
 .typing-text p span.active{
-    color: #17A2B8;
+    color: #333333;
 }
 .typing-text p span.active::before{
     position: absolute;
@@ -154,24 +129,26 @@ a.article-title:hover {
     left: 0;
     opacity: 0;
     border-radius: 5px;
-    background: #17A2B8;
+    background: #333333;
     animation: blink 1s ease-in-out infinite;
 }
+/* animation */
 @keyframes blink{
     50%{ 
         opacity: 1; 
     }
 }
+/* content for non typing pages */
 .content-box .content{
     margin-top: 17px;
     display: flex;
-    padding: 12px 0;
+    padding: 12px 0px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid #bfbfbf;
 }
-.content button{
+/* .content button{
     outline: none;
     border: none;
     width: 105px;
@@ -182,10 +159,12 @@ a.article-title:hover {
     border-radius: 5px;
     background: #17A2B8;
     transition: transform 0.3s ease;
-}
-.content button:active{
+} */
+/* .content button:active{
     transform: scale(0.97);
-}
+} */
+
+/* results */
 .content .result-details{
     display: flex;
     flex-wrap: wrap;
@@ -218,6 +197,8 @@ li span b{
 li:not(:first-child) span{
     font-weight: 500;
 }
+
+/* formatting for different devices */
 @media (max-width: 745px) {
     .wrapper{
         padding: 20px;

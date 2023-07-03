@@ -34,7 +34,7 @@ class StatListView(ListView):
     template_name = 'type/stats.html'
     context_object_name = 'stats'
     ordering = ['-time']
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
