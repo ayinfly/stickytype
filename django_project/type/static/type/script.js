@@ -33,7 +33,7 @@ cpmTag = document.querySelector(".cpm span");
 
 // important vars
 let timer,
-maxTime = 15,
+maxTime = 5,
 timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
 
@@ -86,9 +86,9 @@ function initTyping() {
         mistakeTag.innerText = mistakes;
         cpmTag.innerText = charIndex - mistakes;
     } else {
-        sendData();
         clearInterval(timer);
         inpField.value = "";
+        sendData();
     }   
 }
 
@@ -100,8 +100,8 @@ function initTimer() {
         let wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
         wpmTag.innerText = wpm;
     } else {
-        sendData();
         clearInterval(timer);
+        sendData();
     }
 }
 
@@ -123,14 +123,31 @@ inpField.addEventListener("input", initTyping);
 tryAgainBtn.addEventListener("click", resetGame);
 
 function sendData() {
-    var catid;
-    catid = $(this).attr("data-catid");
+    let csrftoken = getCookie('csrftoken');
     $.ajax(
     {
-        type:"GET",
-        url: "/done",
+        type:"POST",
+        
+        url: "/done/",
         data:{
-            'wpm_total':wpmTag.innerText
+            wpm_total: wpmTag.innerText,
+            csrfmiddelwaretoken: csrftoken
         }
     })
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

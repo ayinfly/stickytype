@@ -16,11 +16,12 @@ def about(request):
     return render(request, 'type/about.html', context)
 
 def newStat(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         stat_wpm_total = request.GET['wpm_total']
         m = Stat(wpm_total=stat_wpm_total, wpm_raw=99, accuracy=100, author=request.user, mode='time 15')
         m.save()
-        return redirect('profile')
+        print('this happened')
+        return redirect('type-leaderboard')
     else:
         return redirect('type-home')
         
