@@ -33,15 +33,17 @@ cpmTag = document.querySelector(".cpm span");
 
 // important vars
 let timer,
-maxTime = 5,
+maxTime = 1,
 timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
+let dataSent = false
 
 // sent vars
 let wpm_total = 0
 
 // generate a random paragraph and adds each letter as a span to the typing text element
 function loadParagraph() {
+    dataSent = false;
     const ranIndex = Math.floor(Math.random() * paragraphs.length);
     typingText.innerHTML = "";
     paragraphs[ranIndex].split("").forEach(char => {
@@ -91,7 +93,10 @@ function initTyping() {
     } else {
         clearInterval(timer);
         inpField.value = "";
-        sendData();
+        if (dataSent == false) {
+            dataSent = true;
+            sendData()
+        }
     }   
 }
 
@@ -105,7 +110,10 @@ function initTimer() {
         wpmTag.innerText = wpm;
     } else {
         clearInterval(timer);
-        sendData();
+        if (dataSent == false) {
+            dataSent = true;
+            sendData()
+        }
     }
 }
 
@@ -135,6 +143,9 @@ function sendData() {
         headers: { "X-CSRFToken": csrftoken },
         data:{
             'wpm_total': wpm_total
+        },
+        success: function (data) {
+            window.location.href = '/'
         }
     })
 }

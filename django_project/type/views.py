@@ -20,9 +20,9 @@ def newStat(request):
         stat_wpm_total = request.POST.get('wpm_total')
         m = Stat(wpm_total=stat_wpm_total, wpm_raw=99, accuracy=100, author=request.user, mode='time 15')
         m.save()
-        return redirect('/leaderboard/', permanent=True)
+        return redirect(home)
     else:
-        return redirect('type-home')
+        return redirect(stats)
         
 
 class StatListView(ListView):
