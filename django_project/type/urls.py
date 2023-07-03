@@ -11,4 +11,5 @@ urlpatterns = [
     path("about/", views.about, name='type-about'),
     path("stats/<str:username>", StatListView.as_view(), name='type-stats'),
     path("leaderboard/", LeaderboardListView.as_view(), name='type-leaderboard'),
+    path("done/", views.newStat, name='type-done'),
 ]

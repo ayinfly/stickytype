@@ -86,6 +86,7 @@ function initTyping() {
         mistakeTag.innerText = mistakes;
         cpmTag.innerText = charIndex - mistakes;
     } else {
+        sendData();
         clearInterval(timer);
         inpField.value = "";
     }   
@@ -99,6 +100,7 @@ function initTimer() {
         let wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
         wpmTag.innerText = wpm;
     } else {
+        sendData();
         clearInterval(timer);
     }
 }
@@ -119,3 +121,16 @@ function resetGame() {
 loadParagraph();
 inpField.addEventListener("input", initTyping);
 tryAgainBtn.addEventListener("click", resetGame);
+
+function sendData() {
+    var catid;
+    catid = $(this).attr("data-catid");
+    $.ajax(
+    {
+        type:"GET",
+        url: "/done",
+        data:{
+            'wpm_total':wpmTag.innerText
+        }
+    })
+}

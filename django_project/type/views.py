@@ -1,6 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -14,6 +14,16 @@ def about(request):
         'title': 'about'
     }
     return render(request, 'type/about.html', context)
+
+def newStat(request):
+    if request.method == 'GET':
+        stat_wpm_total = request.GET['wpm_total']
+        m = Stat(wpm_total=stat_wpm_total, wpm_raw=99, accuracy=100, author=request.user, mode='time 15')
+        m.save()
+        return redirect('profile')
+    else:
+        return redirect('type-home')
+        
 
 class StatListView(ListView):
     model = Stat
