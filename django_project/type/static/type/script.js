@@ -145,7 +145,13 @@ function sendData() {
             'wpm_total': wpm_total
         },
         success: function (data) {
-            window.location.href = '/'
+            if (data.status == 1) {
+                console.log('status ok');
+                window.location.href = "/stats/" + data.username;
+            } else {
+                console.log('status failed');
+                window.location.reload();
+            }
         }
     })
 }

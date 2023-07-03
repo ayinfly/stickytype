@@ -5,6 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Stat
+from django.http import HttpResponse
+import json
 
 def home(request):
     return render(request, 'type/home.html')
@@ -20,7 +22,7 @@ def newStat(request):
         stat_wpm_total = request.POST.get('wpm_total')
         m = Stat(wpm_total=stat_wpm_total, wpm_raw=99, accuracy=100, author=request.user, mode='time 15')
         m.save()
-        return redirect(home)
+        return HttpResponse(json.dumps({'status': "1", 'username': request.user.username}), content_type="application/json")
     else:
         return redirect(stats)
         
