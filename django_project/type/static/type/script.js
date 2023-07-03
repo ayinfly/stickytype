@@ -37,6 +37,9 @@ maxTime = 5,
 timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
 
+// sent vars
+let wpm_total = 0
+
 // generate a random paragraph and adds each letter as a span to the typing text element
 function loadParagraph() {
     const ranIndex = Math.floor(Math.random() * paragraphs.length);
@@ -81,7 +84,7 @@ function initTyping() {
 
         let wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
         wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
-        
+        wpm_total = wpm;
         wpmTag.innerText = wpm;
         mistakeTag.innerText = mistakes;
         cpmTag.innerText = charIndex - mistakes;
@@ -98,6 +101,7 @@ function initTimer() {
         timeLeft--;
         timeTag.innerText = timeLeft;
         let wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
+        wpm_total = wpm;
         wpmTag.innerText = wpm;
     } else {
         clearInterval(timer);
@@ -127,11 +131,10 @@ function sendData() {
     $.ajax(
     {
         type:"POST",
-        
         url: "/done/",
+        headers: { "X-CSRFToken": csrftoken },
         data:{
-            wpm_total: wpmTag.innerText,
-            csrfmiddelwaretoken: csrftoken
+            'wpm_total': wpm_total
         }
     })
 }
