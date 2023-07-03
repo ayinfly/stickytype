@@ -19,8 +19,10 @@ def about(request):
 
 def newStat(request):
     if request.method == 'POST':
-        stat_wpm_total = request.POST.get('wpm_total')
-        m = Stat(wpm_total=stat_wpm_total, wpm_raw=99, accuracy=100, author=request.user, mode='time 15')
+        wpm_total = request.POST.get('wpm_total')
+        wpm_raw = request.POST.get('wpm_raw')
+        accuracy = request.POST.get('accuracy')
+        m = Stat(wpm_total=wpm_total, wpm_raw=wpm_raw, accuracy=accuracy, author=request.user, mode='time 15')
         m.save()
         return HttpResponse(json.dumps({'status': "1", 'username': request.user.username}), content_type="application/json")
     else:

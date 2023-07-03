@@ -33,13 +33,16 @@ cpmTag = document.querySelector(".cpm span");
 
 // important vars
 let timer,
-maxTime = 1,
+maxTime = 15,
 timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
-let dataSent = false
+let dataSent = false;
+let wpm = 0;
 
 // sent vars
 let wpm_total = 0
+let wpm_raw = 0
+let accuracy = 0
 
 // generate a random paragraph and adds each letter as a span to the typing text element
 function loadParagraph() {
@@ -84,15 +87,17 @@ function initTyping() {
         characters.forEach(span => span.classList.remove("active"));
         characters[charIndex].classList.add("active");
 
-        let wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
+        wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
         wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
-        wpm_total = wpm;
         wpmTag.innerText = wpm;
         mistakeTag.innerText = mistakes;
         cpmTag.innerText = charIndex - mistakes;
     } else {
         clearInterval(timer);
         inpField.value = "";
+        wpm_total = wpm;
+        wpm_raw = Math.round((charIndex  / 5) / (maxTime - timeLeft) * 60);
+        accuracy = Math.round(((charIndex - mistakes) * 100) / charIndex);
         if (dataSent == false) {
             dataSent = true;
             sendData()
@@ -105,11 +110,13 @@ function initTimer() {
     if(timeLeft > 0) {
         timeLeft--;
         timeTag.innerText = timeLeft;
-        let wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
-        wpm_total = wpm;
+        wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
         wpmTag.innerText = wpm;
     } else {
         clearInterval(timer);
+        wpm_total = wpm;
+        wpm_raw = Math.round((charIndex  / 5) / (maxTime - timeLeft) * 60);
+        accuracy = Math.round(((charIndex - mistakes) * 100) / charIndex);
         if (dataSent == false) {
             dataSent = true;
             sendData()
@@ -142,7 +149,9 @@ function sendData() {
         url: "/done/",
         headers: { "X-CSRFToken": csrftoken },
         data:{
-            'wpm_total': wpm_total
+            'wpm_total': wpm_total,
+            'wpm_raw': wpm_raw,
+            'accuracy': accuracy
         },
         success: function (data) {
             if (data.status == 1) {

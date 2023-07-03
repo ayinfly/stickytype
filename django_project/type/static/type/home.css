@@ -1,15 +1,12 @@
-/* Import Google Font - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 body{
     display: flex;
     padding: 0 10px;
-    align-items: center;
+    /* align-items: center;  //this shit makes everything too low*/
     justify-content: center;
     min-height: 100vh;
     background: #17A2B8;
