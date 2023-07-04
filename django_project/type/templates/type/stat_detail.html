@@ -1,32 +1,35 @@
 {% extends "type/base.html" %}
 {% block content%}
-    <table class="table table-hover table-striped bg-light">
-        <thead>
-        <tr>
-            <th scope="col">wpm</th>
-            <th scope="col">raw</th>
-            <th scope="col">accuracy</th>
-            <th scope="col">mode</th>
-            <th scope="col">user</th>
-            <th scope="col">date</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="content-section">
+        <table class="table table-hover table-striped bg-light">
+            <thead>
             <tr>
-                <td>{{ object.wpm_total }}</td>
-                <td>{{ object.wpm_raw }}</td>
-                <td>{{ object.accuracy }}%</td>
-                <td>{{ object.mode }}</td>
-                <td>{{ object.author.username }}</td>
-                <td>{{ object.time }}</td>
+                <th scope="col">wpm</th>
+                <th scope="col">raw</th>
+                <th scope="col">accuracy</th>
+                <th scope="col">mode</th>
+                <th scope="col">user</th>
+                <th scope="col">date</th>
             </tr>
-        </tbody>
-    </table>
-    <div>
-        {% if object.author == user %}
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'stat-update' object.id %}">update</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'stat-delete' object.id %}">delete</a>
-        {% endif %}
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ object.wpm_total }}</td>
+                    <td>{{ object.wpm_raw }}</td>
+                    <td>{{ object.accuracy }}%</td>
+                    <td>{{ object.mode }}</td>
+                    <td>{{ object.author.username }}</td>
+                    <td>{{ object.time }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            {% if object.author == user %}
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'stat-update' object.id %}">update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'stat-delete' object.id %}">delete</a>
+            {% endif %}
+        </div>
     </div>
+    
     
 {% endblock content%}

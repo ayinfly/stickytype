@@ -8,7 +8,6 @@
 /* overall page layouts */
 body {
     color: #333333;
-    margin-top: 15%;
     display: flex;
     /* padding: 0 10px; */
     /* align-items: center;  //this shit makes everything too low*/
@@ -43,6 +42,17 @@ ul {
     color: #ffffff;
 }
 
+/* profile stuff */
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+.account-heading {
+    font-size: 2.5rem;
+}
+
 /* i don't think this does anything, but not going to risk it anymore */
 .site-header .navbar-nav .nav-link.active {
     font-weight: 500;
@@ -54,11 +64,12 @@ ul {
     padding: 10px 20px;
     border: 1px solid #dddddd;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-top: 20%;
 }
 
 /* typing box */
 .wrapper{
+    margin-top: 30%;
     /* width: 770px; */
     padding: 35px;
     background: #fff;

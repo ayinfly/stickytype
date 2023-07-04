@@ -1,50 +1,52 @@
 {% extends "type/base.html" %}
 {% block content%}
-    <table class="table table-hover table-striped bg-light round">
-        <thead>
-            <tr>
-                <th scope="col" style="border: none;">wpm</th>
-                <th scope="col">raw</th>
-                <th scope="col">accuracy</th>
-                <th scope="col">mode</th>
-                <th scope="col">user</th>
-                <th scope="col">date</th>
-                <th scope="col" style="border: none;">more</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for stat in stats %}
+    <div class="content-section">
+        <table class="table table-hover table-striped bg-light round">
+            <thead>
                 <tr>
-                    <td>{{ stat.wpm_total }}</td>
-                    <td>{{ stat.wpm_raw }}</td>
-                    <td>{{ stat.accuracy }}%</td>
-                    <td>{{ stat.mode }}</td>
-                    <td><a href="{% url 'type-stats' stat.author.username %}">{{ stat.author.username }}</a></td>
-                    <td>{{ stat.time }}</td>
-                    <td><a href="{% url 'stat-detail' stat.id %}" class="stretched-link">→</a></td>
+                    <th scope="col" style="border: none;">wpm</th>
+                    <th scope="col">raw</th>
+                    <th scope="col">accuracy</th>
+                    <th scope="col">mode</th>
+                    <th scope="col">user</th>
+                    <th scope="col">date</th>
+                    <th scope="col" style="border: none;">more</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for stat in stats %}
+                    <tr>
+                        <td>{{ stat.wpm_total }}</td>
+                        <td>{{ stat.wpm_raw }}</td>
+                        <td>{{ stat.accuracy }}%</td>
+                        <td>{{ stat.mode }}</td>
+                        <td><a href="{% url 'type-stats' stat.author.username %}">{{ stat.author.username }}</a></td>
+                        <td>{{ stat.time }}</td>
+                        <td><a href="{% url 'stat-detail' stat.id %}" class="stretched-link">→</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    {% if is_paginated %}
-        {% if page_obj.has_previous %}
-            <a class="btn btn-secondary mb-4" href="?page=1">first</a>
-            <a class="btn btn-secondary mb-4" href="?page={{ page_obj.previous_page_number}}">previous</a>
-        {% endif %}
-
-        {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-                <a class="btn btn-primary mb-4" href="?page={{ num }}">{{ num }}</a>
-            {% elif num > page_obj.number|add:'-3'  and num < page_obj.number|add:'3' %}
-                <a class="btn btn-secondary mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                <a class="btn btn-secondary mb-4" href="?page=1">first</a>
+                <a class="btn btn-secondary mb-4" href="?page={{ page_obj.previous_page_number}}">previous</a>
             {% endif %}
-        {% endfor %}
 
-        {% if page_obj.has_next %}
-            <a class="btn btn-secondary mb-4" href="?page={{ page_obj.next_page_number}}">next</a>
-            <a class="btn btn-secondary mb-4" href="?page={{ page_obj.paginator.num_pages }}">last</a>
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a class="btn btn-primary mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3'  and num < page_obj.number|add:'3' %}
+                    <a class="btn btn-secondary mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a class="btn btn-secondary mb-4" href="?page={{ page_obj.next_page_number}}">next</a>
+                <a class="btn btn-secondary mb-4" href="?page={{ page_obj.paginator.num_pages }}">last</a>
+            {% endif %}
         {% endif %}
-    {% endif %}
+    </div>
     
 {% endblock content%}
