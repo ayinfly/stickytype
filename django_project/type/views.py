@@ -22,7 +22,8 @@ def newStat(request):
         wpm_total = request.POST.get('wpm_total')
         wpm_raw = request.POST.get('wpm_raw')
         accuracy = request.POST.get('accuracy')
-        m = Stat(wpm_total=wpm_total, wpm_raw=wpm_raw, accuracy=accuracy, author=request.user, mode='time 15')
+        mode = request.POST.get('mode')
+        m = Stat(wpm_total=wpm_total, wpm_raw=wpm_raw, accuracy=accuracy, author=request.user, mode=mode)
         m.save()
         return HttpResponse(json.dumps({'status': "1", 'username': request.user.username}), content_type="application/json")
     else:
@@ -46,7 +47,7 @@ class LeaderboardListView(ListView):
     template_name = 'type/leaderboard.html'
     context_object_name = 'stats'
     ordering = ['-wpm_total']
-    paginate_by = 10
+    paginate_by = 5
 
 class StatDetailView(DetailView):
     model = Stat

@@ -23,14 +23,14 @@ const paragraphs = [
 ];
 
 // document consts
-const typingText = document.querySelector(".typing-text p"),
-inpField = document.querySelector(".wrapper .input-field"),
-tryAgainBtn = document.querySelector(".content button"),
-timeTag = document.querySelector(".time span b"),
-accuracyTag = document.querySelector(".accuracy span"),
-wpmTag = document.querySelector(".wpm span"),
-rawTag = document.querySelector(".raw span"),
-cpmTag = document.querySelector(".cpm span");
+const typingText = document.querySelector(".typing-text p");
+const inpField = document.querySelector(".wrapper .input-field");
+const tryAgainBtn = document.querySelector(".content button");
+const timeTag = document.querySelector(".time span b");
+const accuracyTag = document.querySelector(".accuracy span");
+const wpmTag = document.querySelector(".wpm span");
+const awTag = document.querySelector(".raw span");
+const cpmTag = document.querySelector(".cpm span");
 
 // important vars
 let timer,
@@ -41,12 +41,15 @@ let dataSent = false;
 let wpm = 0;
 
 // sent vars
-let wpm_total = 0
-let wpm_raw = 0
-let accuracy = 0
+let wpm_total = 0;
+let wpm_raw = 0;
+let accuracy = 0;
+let mode_type = 'time';
+let mode_amt = 15
 
 // generate a random paragraph and adds each letter as a span to the typing text element
 function loadParagraph() {
+    // prevents repeated data from sending
     dataSent = false;
     const ranIndex = Math.floor(Math.random() * paragraphs.length);
     typingText.innerHTML = "";
@@ -144,7 +147,7 @@ function resetGame() {
 loadParagraph();
 inpField.addEventListener("input", initTyping);
 tryAgainBtn.addEventListener("click", resetGame);
-
+// data sending
 function sendData() {
     let csrftoken = getCookie('csrftoken');
     $.ajax(
@@ -155,7 +158,8 @@ function sendData() {
         data:{
             'wpm_total': wpm_total,
             'wpm_raw': wpm_raw,
-            'accuracy': accuracy
+            'accuracy': accuracy,
+            'mode': mode_type + " " + mode_amt
         },
         success: function (data) {
             if (data.status == 1) {
