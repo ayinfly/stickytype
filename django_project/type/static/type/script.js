@@ -25,12 +25,25 @@ const paragraphs = [
 // document consts
 const typingText = document.querySelector(".typing-text p");
 const inpField = document.querySelector(".wrapper .input-field");
-const tryAgainBtn = document.querySelector(".content button");
+const tryAgainBtn = document.querySelector(".try-again");
 const timeTag = document.querySelector(".time span b");
 const accuracyTag = document.querySelector(".accuracy span");
 const wpmTag = document.querySelector(".wpm span");
-const awTag = document.querySelector(".raw span");
+const rawTag = document.querySelector(".raw span");
 const cpmTag = document.querySelector(".cpm span");
+const errorsTag = document.querySelector(".errors span");
+const modeTag = document.querySelector(".mode span");
+
+// mode buttons
+const timeBtn = document.querySelector(".type-time");
+const wordsBtn = document.querySelector(".type-words");
+const sentencesBtn = document.querySelector(".type-sentences");
+const amt15Btn = document.querySelector(".amt-15");
+const amt30Btn = document.querySelector(".amt-30");
+const amt45Btn = document.querySelector(".amt-45");
+const amt60Btn = document.querySelector(".amt-60");
+const amt90Btn = document.querySelector(".amt-90");
+const amt120Btn = document.querySelector(".amt-120");
 
 // important vars
 let timer,
@@ -97,7 +110,8 @@ function initTyping() {
         accuracy = Math.round(((charIndex - mistakes) * 100) / charIndex);
         accuracyTag.innerText = accuracy + "%";
         wpm_raw = Math.round((charIndex  / 5) / (maxTime - timeLeft) * 60);
-        rawTag.innerText = wpm_raw
+        errorsTag.innerText = mistakes;
+        rawTag.innerText = wpm_raw;
         cpmTag.innerText = charIndex - mistakes;
     } else {
         clearInterval(timer);
@@ -142,11 +156,105 @@ function resetGame() {
     wpmTag.innerText = 0;
     accuracyTag.innerText = 0;
     cpmTag.innerText = 0;
+    modeTag.innerText = mode_type + " " + mode_amt
 }
 
+// button workaround cuz idk how to do this
+function timeMode() {
+    mode_type = 'time';
+    timeBtn.className = "btn btn-primary type-time";
+    wordsBtn.className = "btn btn-secondary type-words";
+    sentencesBtn.className = "btn btn-secondary type-time";
+    resetGame();
+}
+function wordsMode() {
+    mode_type = 'words';
+    timeBtn.className = "btn btn-secondary type-time";
+    wordsBtn.className = "btn btn-primary type-words";
+    sentencesBtn.className = "btn btn-secondary type-time";
+    resetGame();
+}
+function sentencesMode() {
+    mode_type = 'sentences';
+    timeBtn.className = "btn btn-secondary type-time";
+    wordsBtn.className = "btn btn-secondary type-words";
+    sentencesBtn.className = "btn btn-primary type-time";
+    resetGame();
+}
+function amt15() {
+    mode_amt = 15
+    amt15Btn.className = "btn btn-primary amt-15";
+    amt30Btn.className = "btn btn-secondary amt-30";
+    amt45Btn.className = "btn btn-secondary amt-45";
+    amt60Btn.className = "btn btn-secondary amt-60";
+    amt90Btn.className = "btn btn-secondary amt-90";
+    amt120Btn.className = "btn btn-secondary amt-120";
+    resetGame();
+}
+function amt30() {
+    mode_amt = 30
+    amt15Btn.className = "btn btn-secondary amt-15";
+    amt30Btn.className = "btn btn-primary amt-30";
+    amt45Btn.className = "btn btn-secondary amt-45";
+    amt60Btn.className = "btn btn-secondary amt-60";
+    amt90Btn.className = "btn btn-secondary amt-90";
+    amt120Btn.className = "btn btn-secondary amt-120";
+    resetGame();
+}
+function amt45() {
+    mode_amt = 45
+    amt15Btn.className = "btn btn-secondary amt-15";
+    amt30Btn.className = "btn btn-secondary amt-30";
+    amt45Btn.className = "btn btn-primary amt-45";
+    amt60Btn.className = "btn btn-secondary amt-60";
+    amt90Btn.className = "btn btn-secondary amt-90";
+    amt120Btn.className = "btn btn-secondary amt-120";
+    resetGame();
+}
+function amt60() {
+    mode_amt = 60
+    amt15Btn.className = "btn btn-secondary amt-15";
+    amt30Btn.className = "btn btn-secondary amt-30";
+    amt45Btn.className = "btn btn-secondary amt-45";
+    amt60Btn.className = "btn btn-primary amt-60";
+    amt90Btn.className = "btn btn-secondary amt-90";
+    amt120Btn.className = "btn btn-secondary amt-120";
+    resetGame();
+}
+function amt90() {
+    mode_amt = 90
+    amt15Btn.className = "btn btn-secondary amt-15";
+    amt30Btn.className = "btn btn-secondary amt-30";
+    amt45Btn.className = "btn btn-secondart amt-45";
+    amt60Btn.className = "btn btn-secondary amt-60";
+    amt90Btn.className = "btn btn-primary amt-90";
+    amt120Btn.className = "btn btn-secondary amt-120";
+    resetGame();
+}
+function amt120() {
+    mode_amt = 120
+    amt15Btn.className = "btn btn-secondary amt-15";
+    amt30Btn.className = "btn btn-secondary amt-30";
+    amt45Btn.className = "btn btn-secondary amt-45";
+    amt60Btn.className = "btn btn-secondary amt-60";
+    amt90Btn.className = "btn btn-secondary amt-90";
+    amt120Btn.className = "btn btn-primary amt-120";
+    resetGame();
+}
+// button adders
 loadParagraph();
 inpField.addEventListener("input", initTyping);
 tryAgainBtn.addEventListener("click", resetGame);
+timeBtn.addEventListener("click", timeMode);
+wordsBtn.addEventListener("click", wordsMode);
+sentencesBtn.addEventListener("click", sentencesMode);
+amt15Btn.addEventListener("click", amt15);
+amt30Btn.addEventListener("click", amt30);
+amt45Btn.addEventListener("click", amt45);
+amt60Btn.addEventListener("click", amt60);
+amt90Btn.addEventListener("click", amt90);
+amt120Btn.addEventListener("click", amt120);
+
 // data sending
 function sendData() {
     let csrftoken = getCookie('csrftoken');
