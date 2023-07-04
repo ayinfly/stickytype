@@ -149,6 +149,7 @@ function initTimer() {
 function resetGame() {
     loadParagraph();
     clearInterval(timer);
+    maxTime = mode_amt
     timeLeft = maxTime;
     charIndex = mistakes = isTyping = 0;
     inpField.value = "";
@@ -160,85 +161,71 @@ function resetGame() {
 }
 
 // button workaround cuz idk how to do this
+function modeBtns() {
+    timeBtn.className = "btn btn-light type-time";
+    wordsBtn.className = "btn btn-light type-words";
+    sentencesBtn.className = "btn btn-light type-time";
+}
 function timeMode() {
     mode_type = 'time';
-    timeBtn.className = "btn btn-primary type-time";
-    wordsBtn.className = "btn btn-secondary type-words";
-    sentencesBtn.className = "btn btn-secondary type-time";
+    modeBtns();
+    timeBtn.className = "btn btn-secondary type-time";
     resetGame();
 }
 function wordsMode() {
     mode_type = 'words';
-    timeBtn.className = "btn btn-secondary type-time";
-    wordsBtn.className = "btn btn-primary type-words";
-    sentencesBtn.className = "btn btn-secondary type-time";
+    modeBtns();
+    wordsBtn.className = "btn btn-secondary type-words";
     resetGame();
 }
 function sentencesMode() {
     mode_type = 'sentences';
-    timeBtn.className = "btn btn-secondary type-time";
-    wordsBtn.className = "btn btn-secondary type-words";
-    sentencesBtn.className = "btn btn-primary type-time";
+    modeBtns();
+    sentencesBtn.className = "btn btn-secondary type-time";
     resetGame();
+}
+function amtBtns() {
+    amt15Btn.className = "btn btn-light amt-15";
+    amt30Btn.className = "btn btn-light amt-30";
+    amt45Btn.className = "btn btn-light amt-45";
+    amt60Btn.className = "btn btn-light amt-60";
+    amt90Btn.className = "btn btn-light amt-90";
+    amt120Btn.className = "btn btn-light amt-120";
 }
 function amt15() {
     mode_amt = 15
-    amt15Btn.className = "btn btn-primary amt-15";
-    amt30Btn.className = "btn btn-secondary amt-30";
-    amt45Btn.className = "btn btn-secondary amt-45";
-    amt60Btn.className = "btn btn-secondary amt-60";
-    amt90Btn.className = "btn btn-secondary amt-90";
-    amt120Btn.className = "btn btn-secondary amt-120";
+    amtBtns();
+    amt15Btn.className = "btn btn-secondary amt-15";
     resetGame();
 }
 function amt30() {
     mode_amt = 30
-    amt15Btn.className = "btn btn-secondary amt-15";
-    amt30Btn.className = "btn btn-primary amt-30";
-    amt45Btn.className = "btn btn-secondary amt-45";
-    amt60Btn.className = "btn btn-secondary amt-60";
-    amt90Btn.className = "btn btn-secondary amt-90";
-    amt120Btn.className = "btn btn-secondary amt-120";
+    amtBtns();
+    amt30Btn.className = "btn btn-secondary amt-30";
     resetGame();
 }
 function amt45() {
     mode_amt = 45
-    amt15Btn.className = "btn btn-secondary amt-15";
-    amt30Btn.className = "btn btn-secondary amt-30";
-    amt45Btn.className = "btn btn-primary amt-45";
-    amt60Btn.className = "btn btn-secondary amt-60";
-    amt90Btn.className = "btn btn-secondary amt-90";
-    amt120Btn.className = "btn btn-secondary amt-120";
+    amtBtns();
+    amt45Btn.className = "btn btn-secondary amt-45";
     resetGame();
 }
 function amt60() {
     mode_amt = 60
-    amt15Btn.className = "btn btn-secondary amt-15";
-    amt30Btn.className = "btn btn-secondary amt-30";
-    amt45Btn.className = "btn btn-secondary amt-45";
-    amt60Btn.className = "btn btn-primary amt-60";
-    amt90Btn.className = "btn btn-secondary amt-90";
-    amt120Btn.className = "btn btn-secondary amt-120";
+    amtBtns();
+    amt60Btn.className = "btn btn-secondary amt-60";
     resetGame();
 }
 function amt90() {
     mode_amt = 90
-    amt15Btn.className = "btn btn-secondary amt-15";
-    amt30Btn.className = "btn btn-secondary amt-30";
-    amt45Btn.className = "btn btn-secondart amt-45";
-    amt60Btn.className = "btn btn-secondary amt-60";
-    amt90Btn.className = "btn btn-primary amt-90";
-    amt120Btn.className = "btn btn-secondary amt-120";
+    amtBtns();
+    amt90Btn.className = "btn btn-secondary amt-90";
     resetGame();
 }
 function amt120() {
     mode_amt = 120
-    amt15Btn.className = "btn btn-secondary amt-15";
-    amt30Btn.className = "btn btn-secondary amt-30";
-    amt45Btn.className = "btn btn-secondary amt-45";
-    amt60Btn.className = "btn btn-secondary amt-60";
-    amt90Btn.className = "btn btn-secondary amt-90";
-    amt120Btn.className = "btn btn-primary amt-120";
+    amtBtns();
+    amt120Btn.className = "btn btn-secondary amt-120";
     resetGame();
 }
 // button adders
