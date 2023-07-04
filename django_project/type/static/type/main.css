@@ -93,7 +93,9 @@ ul {
 /* words to type */
 .content-box .typing-text{
     overflow: hidden;
-    max-height: 256px;
+    max-height: 164px;
+    min-height: 164px;
+    position: relative;
 }
 
 /* scrollbar hidden */
