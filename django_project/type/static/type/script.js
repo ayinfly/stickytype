@@ -41,7 +41,23 @@ function loadParagraph() {
     // prevents repeated data from sending
     dataSent = false;
     let curText = "";
-    if (mode_type = 'words') {
+    if (mode_type == 'time') {
+        for (let i = 0; i < 100; i++) {
+            let ranIndex = Math.floor(Math.random() * words.length);
+            curText += words[ranIndex].toLowerCase();
+            curText += " ";
+        }
+        curText = curText.slice(0, -1); 
+    }
+    if (mode_type == 'words') {
+        for (let i = 0; i < mode_amt; i++) {
+            let ranIndex = Math.floor(Math.random() * words.length);
+            curText += words[ranIndex].toLowerCase();
+            curText += " ";
+        }
+        curText = curText.slice(0, -1);
+    }
+    if (mode_type == 'sentences') {
         for (let i = 0; i < mode_amt; i++) {
             let ranIndex = Math.floor(Math.random() * words.length);
             curText += words[ranIndex].toLowerCase();
@@ -148,7 +164,7 @@ function resetGame() {
 function modeBtns() {
     timeBtn.className = "btn btn-light type-time";
     wordsBtn.className = "btn btn-light type-words";
-    sentencesBtn.className = "btn btn-light type-time";
+    sentencesBtn.className = "btn btn-light type-sentences";
 }
 function timeMode() {
     mode_type = 'time';
@@ -165,7 +181,7 @@ function wordsMode() {
 function sentencesMode() {
     mode_type = 'sentences';
     modeBtns();
-    sentencesBtn.className = "btn btn-secondary type-time";
+    sentencesBtn.className = "btn btn-secondary type-sentences";
     resetGame();
 }
 function amtBtns() {
