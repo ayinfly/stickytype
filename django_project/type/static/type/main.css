@@ -201,6 +201,18 @@ ul {
     font-size: 20px;
     margin-left: 10px;
 }
+
+.result-details li.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0;
+}
+
+.invisible {
+    color: transparent
+}
+
 li span b{
     font-weight: 500;
 }
