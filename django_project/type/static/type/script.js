@@ -32,6 +32,11 @@ let wpm = 0;
 let maxWords = 15;
 let wordsLeft = 15;
 let wordPoints = [];
+let curLine = 0;
+let lineCnt = 0;
+let lineDif = 0;
+let lineTop = 0;
+let lineMeasured = false;
 
 // sent vars
 let wpm_total = 0;
@@ -80,6 +85,10 @@ function loadParagraph() {
     typingText.querySelectorAll("span")[0].classList.add("active");
     document.addEventListener("keydown", () => inpField.focus());
     typingText.addEventListener("click", () => inpField.focus());
+    lineTop = typingText.querySelectorAll("span")[charIndex].getBoundingClientRect().top;
+    lineCnt = 0;
+    lineDif = 0;
+    lineMeasured = false;
 }
 
 // checks typing stats
@@ -110,6 +119,21 @@ function initTyping() {
         }
         characters.forEach(span => span.classList.remove("active"));
         characters[charIndex].classList.add("active");
+        curLine = characters[charIndex].getBoundingClientRect().top;
+        if (lineTop != curLine && lineMeasured == false ) {
+            lineDif = curLine - lineTop;
+            lineMeasured = true;
+        }
+        // console.log(lineTop);
+        // console.log(curLine);
+        if (lineMeasured == true && (curLine - lineTop) / lineDif > 2) {
+            lineCnt += 1;
+            document.getElementById("p-text").style.top = "-" + (lineCnt * lineDif) + "px";
+        } else if (lineMeasured == true && (curLine - lineTop) / lineDif < 2 && lineCnt > 0) {
+            lineCnt -= 1;
+            document.getElementById("p-text").style.top = "-" + (lineCnt * lineDif) + "px";
+        }
+
         wordsLeft = maxWords;
         for (let i = 0; i < wordPoints.length; i++) {
             if (charIndex >= wordPoints[i]) {

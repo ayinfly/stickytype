@@ -110,8 +110,8 @@ ul {
     letter-spacing: 1px;
     word-break: initial;
     color: lightgrey;
-    overflow-y: hidden;
     position: relative;
+    /* top: 0px; change in increments of 31.5 */
 }
 
 /* letters in typing-text */
