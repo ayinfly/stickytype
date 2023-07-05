@@ -108,8 +108,10 @@ ul {
     font-size: 21px;
     text-align: justify;
     letter-spacing: 1px;
-    word-break: normal;
+    word-break: initial;
     color: lightgrey;
+    overflow-y: hidden;
+    position: relative;
 }
 
 /* letters in typing-text */
@@ -130,9 +132,11 @@ ul {
 
 /* highlighted letters */
 .typing-text p span.active{
-    color: #333333;
+    /* color: #333333; */
+    border-left: 2px solid rgba(0,0,0,1);
+    animation: flash 1s ease-in-out infinite;
 }
-.typing-text p span.active::before{
+/* .typing-text p span.active::before{
     position: absolute;
     content: "";
     height: 2px;
@@ -143,11 +147,16 @@ ul {
     border-radius: 5px;
     background: #333333;
     animation: blink 1s ease-in-out infinite;
-}
+} */
 /* animation */
-@keyframes blink{
+/* @keyframes blink{
     50%{ 
         opacity: 1; 
+    }
+} */
+@keyframes flash{
+    50%{
+        border-color: rgba(0,0,0,0);
     }
 }
 /* content for non typing pages */

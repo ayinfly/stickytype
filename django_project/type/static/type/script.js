@@ -9,6 +9,7 @@ const rawTag = document.querySelector(".raw span");
 const cpmTag = document.querySelector(".cpm span");
 const errorsTag = document.querySelector(".errors span");
 const modeTag = document.querySelector(".mode span");
+const modeLeft = document.querySelector(".time p")
 
 // mode buttons
 const timeBtn = document.querySelector(".type-time");
@@ -28,6 +29,9 @@ timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
 let dataSent = false;
 let wpm = 0;
+let maxWords = 15;
+let wordsLeft = 15;
+let wordPoints = [];
 
 // sent vars
 let wpm_total = 0;
@@ -38,6 +42,7 @@ let mode_amt = 15
 
 // generate a random paragraph and adds each letter as a span to the typing text element
 function loadParagraph() {
+    wordPoints = [];
     // prevents repeated data from sending
     dataSent = false;
     let curText = "";
@@ -54,6 +59,7 @@ function loadParagraph() {
             let ranIndex = Math.floor(Math.random() * words.length);
             curText += words[ranIndex].toLowerCase();
             curText += " ";
+            wordPoints.push(curText.length);
         }
         curText = curText.slice(0, -1);
     }
@@ -62,6 +68,7 @@ function loadParagraph() {
             let ranIndex = Math.floor(Math.random() * words.length);
             curText += words[ranIndex].toLowerCase();
             curText += " ";
+            wordPoints.push(curText.length);
         }
         curText = curText.slice(0, -1);
     }
@@ -103,7 +110,15 @@ function initTyping() {
         }
         characters.forEach(span => span.classList.remove("active"));
         characters[charIndex].classList.add("active");
-
+        wordsLeft = maxWords;
+        for (let i = 0; i < wordPoints.length; i++) {
+            if (charIndex >= wordPoints[i]) {
+                wordsLeft -= 1;
+            }
+        }
+        if (mode_type != 'time') {
+            timeTag.innerText = wordsLeft;
+        }
         wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
         wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
         wpmTag.innerText = wpm;
@@ -129,10 +144,12 @@ function initTyping() {
 // timer
 function initTimer() {
     if(timeLeft > 0) {
-        timeLeft--;
-        timeTag.innerText = timeLeft;
-        wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
-        wpmTag.innerText = wpm;
+            timeLeft--;
+            if (mode_type == 'time') {
+                timeTag.innerText = timeLeft;
+            }
+            wpm = Math.round(((charIndex - mistakes)  / 5) / (maxTime - timeLeft) * 60);
+            wpmTag.innerText = wpm;
     } else {
         clearInterval(timer);
         wpm_total = wpm;
@@ -149,11 +166,22 @@ function initTimer() {
 function resetGame() {
     loadParagraph();
     clearInterval(timer);
-    maxTime = mode_amt
+    if (mode_type == 'time') {
+        maxTime = mode_amt;
+    } else {
+        maxTime = 10000000;
+        maxWords = mode_amt;
+    }
     timeLeft = maxTime;
+    wordsLeft = maxWords;
     charIndex = mistakes = isTyping = 0;
+    modeLeft.innerText = mode_type + " left:"
     inpField.value = "";
-    timeTag.innerText = timeLeft;
+    if (mode_type == 'time') {
+        timeTag.innerText = timeLeft;
+    } else {
+        timeTag.innerText = wordsLeft;
+    }
     wpmTag.innerText = 0;
     accuracyTag.innerText = 0;
     cpmTag.innerText = 0;
