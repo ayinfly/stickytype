@@ -14,7 +14,6 @@ const modeLeft = document.querySelector(".time p")
 // mode buttons
 const timeBtn = document.querySelector(".type-time");
 const wordsBtn = document.querySelector(".type-words");
-const sentencesBtn = document.querySelector(".type-sentences");
 const amt15Btn = document.querySelector(".amt-15");
 const amt30Btn = document.querySelector(".amt-30");
 const amt45Btn = document.querySelector(".amt-45");
@@ -60,15 +59,6 @@ function loadParagraph() {
         curText = curText.slice(0, -1); 
     }
     if (mode_type == 'words') {
-        for (let i = 0; i < mode_amt; i++) {
-            let ranIndex = Math.floor(Math.random() * words.length);
-            curText += words[ranIndex].toLowerCase();
-            curText += " ";
-            wordPoints.push(curText.length);
-        }
-        curText = curText.slice(0, -1);
-    }
-    if (mode_type == 'sentences') {
         for (let i = 0; i < mode_amt; i++) {
             let ranIndex = Math.floor(Math.random() * words.length);
             curText += words[ranIndex].toLowerCase();
@@ -216,7 +206,6 @@ function resetGame() {
 function modeBtns() {
     timeBtn.className = "btn btn-light type-time";
     wordsBtn.className = "btn btn-light type-words";
-    sentencesBtn.className = "btn btn-light type-sentences";
 }
 function timeMode() {
     mode_type = 'time';
@@ -228,12 +217,6 @@ function wordsMode() {
     mode_type = 'words';
     modeBtns();
     wordsBtn.className = "btn btn-secondary type-words";
-    resetGame();
-}
-function sentencesMode() {
-    mode_type = 'sentences';
-    modeBtns();
-    sentencesBtn.className = "btn btn-secondary type-sentences";
     resetGame();
 }
 function amtBtns() {
@@ -286,7 +269,6 @@ inpField.addEventListener("input", initTyping);
 tryAgainBtn.addEventListener("click", resetGame);
 timeBtn.addEventListener("click", timeMode);
 wordsBtn.addEventListener("click", wordsMode);
-sentencesBtn.addEventListener("click", sentencesMode);
 amt15Btn.addEventListener("click", amt15);
 amt30Btn.addEventListener("click", amt30);
 amt45Btn.addEventListener("click", amt45);
