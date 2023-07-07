@@ -84,7 +84,7 @@ class LeaderboardListView(ListView):
     template_name = 'type/leaderboard.html'
     context_object_name = 'stats'
     ordering = ['-wpm_total']
-    paginate_by = 5
+    paginate_by = 10
 
 class StatDetailView(DetailView):
     model = Stat

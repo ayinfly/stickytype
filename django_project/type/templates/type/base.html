@@ -33,8 +33,8 @@
                         {% if user.is_authenticated %}
                             <a class="nav-item nav-link" href="{% url 'type-stats' user.username %}">stats</a>
                         {% endif %}
-                        <a class="nav-item nav-link" href="{% url 'type-about' %}">about</a>
                         <a class="nav-item nav-link" href="{% url 'type-leaderboard' %}">leaderboard</a>
+                        <a class="nav-item nav-link" href="{% url 'type-about' %}">about</a>
                         <a class="nav-item nav-link disabled" href="/admin">admin</a>
                     </div>
                     <!-- Navbar Right Side -->

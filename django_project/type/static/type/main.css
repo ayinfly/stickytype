@@ -76,6 +76,11 @@ ul {
     justify-content: center;
 }
 
+.leaderboard-pfp {
+    height: 25px;
+    width: 25px;
+}
+
 /* i don't think this does anything, but not going to risk it anymore */
 .site-header .navbar-nav .nav-link.active {
     font-weight: 500;
