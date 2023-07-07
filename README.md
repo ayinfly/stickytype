@@ -1,2 +1,2 @@
 # stickytype
-typing test website with individual letter statistics
+typing test website with profile saving
