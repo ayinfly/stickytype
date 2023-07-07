@@ -29,13 +29,13 @@ const data = {
     datasets: [{
         label: 'Test',
         data: scatterData,
-        backgroundColor: 'rgb(255, 99, 132)'
+        backgroundColor: 'rgb(13,110,253)'
     },
     {
-      label: 'Line of Best Fit',
+      label: 'lsrl',
       data: lineData,
       fill: false,
-      borderColor: 'rgba(255, 99, 132, 1)',
+      borderColor: 'rgba(108, 117, 125, 1)',
       borderWidth: 1,
       showLine: true
     }],
