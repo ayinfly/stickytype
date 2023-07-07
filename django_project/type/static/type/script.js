@@ -23,7 +23,7 @@ const amt120Btn = document.querySelector(".amt-120");
 
 // important vars
 let timer,
-maxTime = 15,
+maxTime = 10000000,
 timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
 let dataSent = false;
@@ -41,7 +41,7 @@ let lineMeasured = false;
 let wpm_total = 0;
 let wpm_raw = 0;
 let accuracy = 0;
-let mode_type = 'time';
+let mode_type = 'words';
 let mode_amt = 15
 
 // generate a random paragraph and adds each letter as a span to the typing text element

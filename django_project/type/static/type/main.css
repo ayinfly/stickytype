@@ -52,6 +52,29 @@ ul {
 .account-heading {
     font-size: 2.5rem;
 }
+.stat-img {
+    height: 100px;
+    width: 100px;
+}
+
+.grid-item {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.grid-item p {
+    color: gray;
+}
+
+.grid-item:not(:last-child) {
+    border-right: none;
+}
+
+.row {
+    justify-content: center;
+}
 
 /* i don't think this does anything, but not going to risk it anymore */
 .site-header .navbar-nav .nav-link.active {

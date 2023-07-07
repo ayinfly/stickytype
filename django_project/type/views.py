@@ -1,6 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.db.models import Avg
+from django.db.models import Avg, Max, Min
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
@@ -36,7 +36,7 @@ class StatListView(ListView):
     template_name = 'type/stats.html'
     context_object_name = 'stats'
     ordering = ['-time']
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -47,10 +47,34 @@ class StatListView(ListView):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         
         stat_queryset = self.get_queryset()
-        context['avg_wpm_total'] = round(stat_queryset.aggregate(Avg('wpm_total'))['wpm_total__avg'])
-        context['avg_wpm_raw'] = round(stat_queryset.aggregate(Avg('wpm_raw'))['wpm_raw__avg'])
-        context['avg_accuracy'] = round(stat_queryset.aggregate(Avg('accuracy'))['accuracy__avg'])
-        
+        try:
+            context['avg_wpm_total'] = round(stat_queryset.aggregate(Avg('wpm_total'))['wpm_total__avg'], 2)
+            context['avg_wpm_raw'] = round(stat_queryset.aggregate(Avg('wpm_raw'))['wpm_raw__avg'], 2)
+            context['avg_accuracy'] = round(stat_queryset.aggregate(Avg('accuracy'))['accuracy__avg'], 2)
+            context['max_wpm_total'] = round(stat_queryset.aggregate(Max('wpm_total'))['wpm_total__max'], 2)
+            context['max_wpm_raw'] = round(stat_queryset.aggregate(Max('wpm_raw'))['wpm_raw__max'], 2)
+            context['max_accuracy'] = round(stat_queryset.aggregate(Max('accuracy'))['accuracy__max'], 2)
+            context['min_wpm_total'] = round(stat_queryset.aggregate(Min('wpm_total'))['wpm_total__min'], 2)
+            context['min_wpm_raw'] = round(stat_queryset.aggregate(Min('wpm_raw'))['wpm_raw__min'], 2)
+            context['min_accuracy'] = round(stat_queryset.aggregate(Min('accuracy'))['accuracy__min'], 2)
+        except:
+            context['avg_wpm_total'] = 0
+            context['avg_wpm_raw'] = 0
+            context['avg_accuracy'] = 0
+            context['max_wpm_total'] = 0
+            context['max_wpm_raw'] = 0
+            context['max_accuracy'] = 0
+            context['min_wpm_total'] = 0
+            context['min_wpm_raw'] = 0
+            context['min_accuracy'] = 0
+
+        graph_wpm = []
+        graph_date = []
+        for stat in stat_queryset:
+            graph_wpm.append(stat.wpm_total)
+            graph_date.append(str(stat.time))
+        context['graph_wpm'] = graph_wpm
+        context['graph_date'] = graph_date
         context['image'] = user.profile.image  # Assuming User model has a related Profile model with an image field
         return context
         
