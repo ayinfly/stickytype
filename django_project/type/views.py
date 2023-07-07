@@ -1,5 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet
+from django.db.models import Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
@@ -40,6 +41,18 @@ class StatListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Stat.objects.filter(author=user).order_by('-time')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        
+        stat_queryset = self.get_queryset()
+        context['avg_wpm_total'] = round(stat_queryset.aggregate(Avg('wpm_total'))['wpm_total__avg'])
+        context['avg_wpm_raw'] = round(stat_queryset.aggregate(Avg('wpm_raw'))['wpm_raw__avg'])
+        context['avg_accuracy'] = round(stat_queryset.aggregate(Avg('accuracy'))['accuracy__avg'])
+        
+        context['image'] = user.profile.image  # Assuming User model has a related Profile model with an image field
+        return context
         
 
 class LeaderboardListView(ListView):
