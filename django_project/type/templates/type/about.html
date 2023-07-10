@@ -1,6 +1,29 @@
 {% extends "type/base.html" %}
 {% block content%}
     <div class="content-section">
-        <h1 class="round">About Page</h1>
+        <h1>about</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="grid-item">
+                        <h3><b>{{ avg_wpm_total }}</b></h3>
+                        <p>tests taken</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="grid-item">
+                        <h3><b>{{ avg_wpm_raw }}</b></h3>
+                        <p>words typed</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="grid-item">
+                        <h3><b>{{ avg_accuracy }}</b></h3>
+                        <p>user count</p>
+                    </div>
+                </div>
+                <p>stickytype is a proof of concept typing website with leaderboard and database functionality</p>
+            </div>
+        </div>
     </div>
 {% endblock content%}

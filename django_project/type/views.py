@@ -10,7 +10,10 @@ from django.http import HttpResponse
 import json
 
 def home(request):
-    return render(request, 'type/home.html')
+    context = {
+        'title': 'type'
+    }
+    return render(request, 'type/home.html', context)
 
 def about(request):
     context = {
@@ -67,7 +70,7 @@ class StatListView(ListView):
             context['min_wpm_total'] = 0
             context['min_wpm_raw'] = 0
             context['min_accuracy'] = 0
-
+        context['title'] = 'stats'
         graph_wpm = []
         graph_date = []
         for stat in stat_queryset:
@@ -85,6 +88,11 @@ class LeaderboardListView(ListView):
     context_object_name = 'stats'
     ordering = ['-wpm_total']
     paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'leaderboard'
+        return context
 
 class StatDetailView(DetailView):
     model = Stat
