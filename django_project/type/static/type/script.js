@@ -288,7 +288,7 @@ function sendData() {
             'wpm_total': wpm_total,
             'wpm_raw': wpm_raw,
             'accuracy': accuracy,
-            'mode': mode_type + " " + mode_amt
+            'mode': mode_type + " " + mode_amt,
         },
         success: function (data) {
             if (data.status == 1) {

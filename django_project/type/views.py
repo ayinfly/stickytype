@@ -1,11 +1,12 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.db.models import Avg, Max, Min
+from django.db.models import Avg, Max, Min, Sum
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Stat
+from users.models import Profile
 from django.http import HttpResponse
 import json
 
@@ -17,7 +18,10 @@ def home(request):
 
 def about(request):
     context = {
-        'title': 'about'
+        'title': 'about',
+        'test_cnt': Stat.objects.count(),
+        'avg_wpm': round(Stat.objects.aggregate(Avg('wpm_total'))['wpm_total__avg'], 2),
+        'user_cnt': Profile.objects.count()
     }
     return render(request, 'type/about.html', context)
 
