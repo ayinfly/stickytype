@@ -107,7 +107,7 @@ class StatDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         graph_wpm = []
         graph_date = []
-        for stat in Stat.objects.all():
+        for stat in Stat.objects.filter(author=self.get_object().author).order_by('-time'):
             graph_wpm.append(stat.wpm_total)
             graph_date.append(str(stat.time))
         context['graph_wpm'] = graph_wpm
