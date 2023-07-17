@@ -1,6 +1,10 @@
 {% extends "type/base.html" %}
+{% load static %}
 {% block content%}
     <div class="content-section">
+        <div id="container">
+            <canvas id="pie-chart"></canvas>
+        </div>
         <table class="table table-hover table-striped bg-light">
             <thead>
             <tr>
@@ -31,5 +35,17 @@
         </div>
     </div>
     
-    
+    <script>
+        let graph_wpm = [];
+        let graph_date = [];
+        "{% for wpm in graph_wpm %}"
+            graph_wpm.push("{{ wpm }}");
+        "{% endfor %}"
+        "{% for date in graph_date %}"
+            graph_date.push(new Date("{{ date }}"));
+        "{% endfor %}"
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="{% static 'type/detail.js' %}"></script>
 {% endblock content%}

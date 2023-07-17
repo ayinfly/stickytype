@@ -100,6 +100,7 @@ class LeaderboardListView(ListView):
 
 class StatDetailView(DetailView):
     model = Stat
+    context_object_name = 'stat'
 
 class StatCreateView(LoginRequiredMixin, CreateView):
     model = Stat
