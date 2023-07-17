@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.db.models import Avg, Max, Min, Sum
 from django.shortcuts import render, get_object_or_404, redirect
@@ -100,7 +100,21 @@ class LeaderboardListView(ListView):
 
 class StatDetailView(DetailView):
     model = Stat
+    template_name = 'type/stat_detail.html'
     context_object_name = 'stat'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        graph_wpm = []
+        graph_date = []
+        for stat in Stat.objects.all():
+            graph_wpm.append(stat.wpm_total)
+            graph_date.append(str(stat.time))
+        context['graph_wpm'] = graph_wpm
+        context['graph_date'] = graph_date
+        return context
+        
+        
 
 class StatCreateView(LoginRequiredMixin, CreateView):
     model = Stat
