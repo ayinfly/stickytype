@@ -107,10 +107,16 @@ class StatDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         graph_wpm = []
         graph_date = []
+        graph_raw = []
+        accuracy = []
         for stat in Stat.objects.filter(author=self.get_object().author).order_by('-time'):
             graph_wpm.append(stat.wpm_total)
             graph_date.append(str(stat.time))
+            graph_raw.append(stat.wpm_raw)
+            accuracy.append(stat.accuracy)
         context['graph_wpm'] = graph_wpm
+        context['graph_raw'] = graph_raw
+        context['accuracy'] = accuracy
         context['graph_date'] = graph_date
         return context
         

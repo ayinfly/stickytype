@@ -38,11 +38,19 @@
     <script>
         let graph_wpm = [];
         let graph_date = [];
+        let graph_raw = [];
+        let accuracy = [];
         "{% for wpm in graph_wpm %}"
             graph_wpm.push("{{ wpm }}");
         "{% endfor %}"
         "{% for date in graph_date %}"
             graph_date.push(new Date("{{ date }}"));
+        "{% endfor %}"
+        "{% for wpm in graph_raw %}"
+            graph_raw.push("{{ wpm }}");
+        "{% endfor %}"
+        "{% for acc in accuracy %}"
+            accuracy.push("{{ acc }}");
         "{% endfor %}"
     </script>
 
