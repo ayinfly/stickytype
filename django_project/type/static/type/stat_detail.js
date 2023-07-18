@@ -25,17 +25,20 @@ const lineData = scatterData.map(point => {
     };
 });
 
+const wpmData = scatterData;
+const wpmLineData = lineData;
+
 const data = {
     datasets: [{
-        label: 'Test',
-        data: scatterData,
+        label: 'wpm_total',
+        data: wpmData,
         backgroundColor: 'rgb(13,110,253)'
     },
     {
       label: 'lsrl',
-      data: lineData,
+      data: wpmLineData,
       fill: false,
-      borderColor: 'rgba(108, 117, 125, 1)',
+      borderColor: 'rgb(13,110,253,1)',
       borderWidth: 1,
       showLine: true
     }],
@@ -51,6 +54,13 @@ const config = {
             type: 'linear',
             position: 'bottom'
         }
+        },
+        legend: {
+            labels: {
+                filter: function(label) {
+                    if (label.text === 'wpm_total') return true;
+                }
+            }
         }
     }
 };
