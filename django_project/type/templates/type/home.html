@@ -60,7 +60,13 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" defer></script>
+    <script>
+        let userAuthed = false;
+        "{% if user.is_authenticated %}"
+            userAuthed = true;
+        "{% endif %}"
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js" defer></script>
     <script src="{% static 'type/words.js' %}"></script>
     <script src="{% static 'type/script.js' %}"></script>
 {% endblock content%}

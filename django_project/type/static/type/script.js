@@ -278,26 +278,31 @@ amt120Btn.addEventListener("click", amt120);
 
 // data sending
 function sendData() {
-    let csrftoken = getCookie('csrftoken');
-    $.ajax(
-    {
-        type:"POST",
-        url: "/done/",
-        headers: { "X-CSRFToken": csrftoken },
-        data:{
-            'wpm_total': wpm_total,
-            'wpm_raw': wpm_raw,
-            'accuracy': accuracy,
-            'mode': mode_type + " " + mode_amt,
-        },
-        success: function (data) {
-            if (data.status == 1) {
-                window.location.href = "/stats/" + data.username;
-            } else {
-                window.location.reload();
+    if (userAuthed === true) {
+        let csrftoken = getCookie('csrftoken');
+        $.ajax(
+        {
+            type:"POST",
+            url: "/done/",
+            headers: { "X-CSRFToken": csrftoken },
+            data:{
+                'wpm_total': wpm_total,
+                'wpm_raw': wpm_raw,
+                'accuracy': accuracy,
+                'mode': mode_type + " " + mode_amt,
+            },
+            success: function (data) {
+                if (data.status == 1) {
+                    window.location.href = "/stats/" + data.username;
+                } else {
+                    window.location.reload();
+                }
             }
-        }
-    })
+        })
+    } else {
+        window.location.href = "/login/"
+    }
+
 }
 
 function getCookie(name) {
